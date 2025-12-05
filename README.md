@@ -1,3 +1,7 @@
+
+<img width="500" height="508" alt="Emoji-angry-default" src="https://github.com/user-attachments/assets/3af0e6fe-9fdb-4e8f-9d41-5cf17881e43b" />
+
+
 # gosh-darnit
 
 [![CI](https://github.com/geoherna/gosh-darnit/actions/workflows/ci.yml/badge.svg)](https://github.com/geoherna/gosh-darnit/actions/workflows/ci.yml)
