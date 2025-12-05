@@ -162,4 +162,3 @@ func (ac *ahoCorasick) HasMatch(text string) bool {
 	})
 	return found
 }
-

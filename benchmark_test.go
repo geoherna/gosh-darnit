@@ -184,4 +184,3 @@ func BenchmarkBuildAutomaton(b *testing.B) {
 		_ = newAhoCorasick(profanityList)
 	}
 }
-

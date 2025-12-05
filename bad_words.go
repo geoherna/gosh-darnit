@@ -220,4 +220,3 @@ var profanityList = []string{
 	"pikey", "pikeys",
 	"gypo", "gypos", "gyppo", "gyppos",
 }
-
