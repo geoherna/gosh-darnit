@@ -1,6 +1,7 @@
 
+<p align="center">
 <img width="500" height="508" alt="Emoji-angry-default" src="https://github.com/user-attachments/assets/3af0e6fe-9fdb-4e8f-9d41-5cf17881e43b" />
-
+</p>
 
 # gosh-darnit
 
