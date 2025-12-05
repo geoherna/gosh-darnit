@@ -550,5 +550,3 @@ func isValidMatch(normalizedSegment, pattern string) bool {
 	// the segment has extra characters that aren't just repeats
 	return pi == len(patternRunes) && si == len(segmentRunes)
 }
-
-
