@@ -10,6 +10,8 @@ const (
 	CensorKeepFirst
 	// CensorKeepFirstLast keeps the first and last characters visible.
 	CensorKeepFirstLast
+
+	// TODO: add CensorKeepLastLast? Mixed Symbols?
 )
 
 // profanityMatcher is the global Aho-Corasick automaton, initialized once at package load.
