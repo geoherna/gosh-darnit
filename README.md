@@ -158,6 +158,10 @@ go test -bench=. -benchmem
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
+## Special Shoutouts
+
+Huge thanks to **John Kim** for the graphic design assets used in this project.
+
 ## License
 
 MIT License - see [LICENSE](LICENSE) for details.
