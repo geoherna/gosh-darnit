@@ -11,7 +11,7 @@
 [![Go Reference](https://pkg.go.dev/badge/github.com/geoherna/gosh-darnit.svg)](https://pkg.go.dev/github.com/geoherna/gosh-darnit)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-A high-performance profanity detection and censoring library for Go, using the Aho-Corasick algorithm for efficient multi-pattern matching.
+A fast, efficient Go library for profanity detection and censorship.
 
 ## Features
 
@@ -153,15 +153,6 @@ Run benchmarks yourself:
 ```bash
 go test -bench=. -benchmem
 ```
-
-## How It Works
-
-1. **Initialization**: At package load, all profanity patterns are compiled into an Aho-Corasick automaton
-2. **Normalization**: Input text is normalized (NFKC, lowercase, leetspeak conversion, homoglyph mapping)
-3. **Repeat Collapsing**: Repeated characters are collapsed for matching (`fuuuck` -> `fuck`)
-4. **Pattern Matching**: The Aho-Corasick automaton finds all matches in a single pass
-5. **Boundary Checking**: Word boundaries are verified on the original text to prevent false positives
-6. **Validation**: Matches are validated to ensure they're legitimate (not coincidental collisions)
 
 ## Contributing
 
