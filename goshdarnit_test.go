@@ -76,25 +76,6 @@ func TestIsProfane(t *testing.T) {
 	}
 }
 
-func TestContainsProfanity(t *testing.T) {
-	// ContainsProfanity is an alias for IsProfane
-	tests := []struct {
-		text     string
-		expected bool
-	}{
-		{"clean text", false},
-		{"fuck this", true},
-		{"", false},
-	}
-
-	for _, tt := range tests {
-		got := ContainsProfanity(tt.text)
-		if got != tt.expected {
-			t.Errorf("ContainsProfanity(%q) = %v, want %v", tt.text, got, tt.expected)
-		}
-	}
-}
-
 func TestCensor(t *testing.T) {
 	tests := []struct {
 		name     string

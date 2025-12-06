@@ -133,11 +133,6 @@ func mergeOverlapping(matches []matchInfo) []matchInfo {
 	return result
 }
 
-// ContainsProfanity is an alias for IsProfane for API compatibility.
-func ContainsProfanity(text string) bool {
-	return IsProfane(text)
-}
-
 // FindProfanity returns a slice of profane words discovered in the txet.
 // Returns nil if no profanity is found.
 func FindProfanity(text string) []string {
