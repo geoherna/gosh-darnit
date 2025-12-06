@@ -62,8 +62,8 @@ func main() {
 package main
 
 import (
-    "fmt"
-    goshdarnit "github.com/geoherna/gosh-darnit"
+	"fmt"
+	"github.com/geoherna/gosh-darnit"
 )
 
 func main() {
