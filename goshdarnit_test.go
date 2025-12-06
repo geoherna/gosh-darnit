@@ -743,7 +743,6 @@ func TestHomoglyphNormalization(t *testing.T) {
 		expected bool // Should it be detected as profane?
 	}{
 		// Cyrillic homoglyphs - cyrillic а -> a, so fаck becomes fack (not fuck).
-		// Still not sure if this is the best approach.
 		{"cyrillic а (looks like a)", "fаck", false},
 		{"cyrillic о (looks like o)", "fоck", false},
 
