@@ -62,8 +62,8 @@ func main() {
 package main
 
 import (
-    "fmt"
-    goshdarnit "github.com/geoherna/gosh-darnit"
+	"fmt"
+	"github.com/geoherna/gosh-darnit"
 )
 
 func main() {
@@ -157,6 +157,10 @@ go test -bench=. -benchmem
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
+
+## Special Shoutouts
+
+Huge thanks to **John Kim** for the graphic design assets used in this project.
 
 ## License
 
