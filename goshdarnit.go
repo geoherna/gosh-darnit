@@ -1,14 +1,3 @@
-// Package goshdarnit provides profanity detection and censoring functionality
-// using the Aho-Corasick algorithm for efficient multi-pattern matching.
-//
-// The package handles various evasion techniques including:
-//   - Leetspeak substitutions (@ -> a, 0 -> o, etc.)
-//   - Unicode homoglyphs (Cyrillic а -> a, etc.)
-//   - Zero-width characters
-//   - Repeated characters ("fuuuuck" → "fuck")
-//   - NFKC Unicode normalization
-//
-// Word boundary detection prevents false positives like "bass", "analyst", etc.
 package goshdarnit
 
 // CensorMode controls how profanity is censored.
@@ -26,11 +15,9 @@ const (
 // profanityMatcher is the global Aho-Corasick automaton, initialized once at package load.
 var profanityMatcher *ahoCorasick
 
-// collapsedToOriginal maps collapsed pattern to original pattern for reporting
 var collapsedToOriginal map[string]string
 
 func init() {
-	// Collapse patterns and build mapping to original
 	collapsedPatterns := make([]string, 0, len(profanityList))
 	collapsedToOriginal = make(map[string]string, len(profanityList))
 	seen := make(map[string]struct{})
@@ -45,7 +32,6 @@ func init() {
 		}
 	}
 
-	// Build the Aho-Corasick automaton from the collapsed patterns
 	profanityMatcher = newAhoCorasick(collapsedPatterns)
 }
 
@@ -112,7 +98,6 @@ func CensorWithDefault(text string) string {
 	return Censor(text, CensorAll)
 }
 
-// mergeOverlapping merges overlapping match regions.
 func mergeOverlapping(matches []matchInfo) []matchInfo {
 	if len(matches) <= 1 {
 		return matches
@@ -153,7 +138,7 @@ func ContainsProfanity(text string) bool {
 	return IsProfane(text)
 }
 
-// FindProfanity returns a list of profane words found in the text.
+// FindProfanity returns a slice of profane words discovered in the txet.
 // Returns nil if no profanity is found.
 func FindProfanity(text string) []string {
 	if len(text) == 0 {

@@ -5,10 +5,6 @@ import (
 	"testing"
 )
 
-// =============================================================================
-// Tests for goshdarnit.go
-// =============================================================================
-
 func TestIsProfane(t *testing.T) {
 	tests := []struct {
 		name     string
@@ -53,9 +49,9 @@ func TestIsProfane(t *testing.T) {
 		{"scunthorpe is not profane", "Welcome to Scunthorpe", false},
 
 		// Unicode homoglyphs - note: cyrillic а -> a, so fаck -> fack (not fuck)
-		{"cyrillic а in fuck", "fаck you", false}, // Cyrillic а -> a, becomes "fack" not "fuck"
-		{"cyrillic о in shit", "shоt", false},     // Cyrillic о -> o, becomes "shot"
-		{"fullwidth letters", "ｆuck", false},      // Fullwidth normalization varies
+		{"cyrillic а in fuck", "fаck you", false},
+		{"cyrillic о in shit", "shоt", false},
+		{"fullwidth letters", "ｆuck", false},
 
 		// Zero-width characters
 		{"zero-width in fuck", "fu\u200Bck", true},
@@ -470,15 +466,10 @@ func TestAhoCorasickOverlappingPatterns(t *testing.T) {
 
 	matches := ac.SearchAll("foobar")
 
-	// Should find: "foo" at 0-3, "foobar" at 0-6, "bar" at 3-6
 	if len(matches) != 3 {
 		t.Errorf("expected 3 matches in 'foobar', got %d", len(matches))
 	}
 }
-
-// =============================================================================
-// Tests for normalize.go
-// =============================================================================
 
 func TestNormalizeText(t *testing.T) {
 	tests := []struct {
@@ -520,7 +511,7 @@ func TestNormalizeText(t *testing.T) {
 
 func TestNormalizeTextPosMap(t *testing.T) {
 	// Test that position mapping works correctly
-	text := "a\u200Bb" // 'a', zero-width space, 'b'
+	text := "a\u200Bb"
 	result := normalizeText(text)
 
 	// Normalized should be "ab"
@@ -539,7 +530,7 @@ func TestCollapseRepeats(t *testing.T) {
 		name            string
 		input           string
 		expectedResult  string
-		expectedStartAt int // Check start position at index 0
+		expectedStartAt int
 	}{
 		{"empty string", "", "", -1},
 		{"no repeats", "abc", "abc", 0},
@@ -567,16 +558,15 @@ func TestCollapseRepeats(t *testing.T) {
 }
 
 func TestCollapseRepeatsEndPositions(t *testing.T) {
-	// Test that end positions correctly span repeated characters
-	text := "heeello" // e repeated 3 times, l repeated 2 times
+	// Test that end positions correctly span repeated characters. I might need
+	// to revisit this if I ever support Unicode normalization.
+	text := "heeello"
 	result, info := collapseRepeats(text)
 
 	if result != "helo" {
 		t.Fatalf("collapsed = %q, want %q", result, "helo")
 	}
 
-	// The 'e' at index 1 in collapsed should map to positions covering "eee"
-	// Check that end positions account for repeats
 	if len(info.endPos) < 2 {
 		t.Fatalf("endPos too short: %d", len(info.endPos))
 	}
@@ -589,12 +579,12 @@ func TestIsWordBoundary(t *testing.T) {
 		pos      int
 		expected bool
 	}{
-		{-1, true}, // Before start
-		{0, true},  // Start of string
-		{5, true},  // Space (non-word char)
-		{6, false}, // Start of "world" - this is a letter
-		{11, true}, // End of string
-		{20, true}, // Past end
+		{-1, true},
+		{0, true},
+		{5, true},
+		{6, false},
+		{11, true},
+		{20, true},
 	}
 
 	for _, tt := range tests {
@@ -612,10 +602,10 @@ func TestIsWordBoundaryBefore(t *testing.T) {
 		pos      int
 		expected bool
 	}{
-		{0, true},  // Start
-		{1, false}, // After 'a'
-		{2, true},  // After space
-		{3, false}, // After 't'
+		{0, true},
+		{1, false},
+		{2, true},
+		{3, false},
 	}
 
 	for _, tt := range tests {
@@ -633,11 +623,11 @@ func TestIsWordBoundaryAfter(t *testing.T) {
 		pos      int
 		expected bool
 	}{
-		{0, false}, // 't' is a letter
-		{4, true},  // Space
-		{5, false}, // 'a' is a letter
-		{6, true},  // End of string
-		{10, true}, // Past end
+		{0, false},
+		{4, true},
+		{5, false},
+		{6, true},
+		{10, true},
 	}
 
 	for _, tt := range tests {
@@ -707,7 +697,8 @@ func TestBuildAsteriskMask(t *testing.T) {
 }
 
 func TestFindMatches(t *testing.T) {
-	// Use the global profanityMatcher
+	// Use the global profanityMatcher.
+	// This is a bit of a hack, but it's the easiest way to test. I will revisit.
 	tests := []struct {
 		name          string
 		text          string
@@ -765,19 +756,19 @@ func TestIsValidMatch(t *testing.T) {
 }
 
 func TestHomoglyphNormalization(t *testing.T) {
-	// Test that various homoglyphs are properly normalized
 	tests := []struct {
 		name     string
 		input    string
 		expected bool // Should it be detected as profane?
 	}{
-		// Cyrillic homoglyphs - cyrillic а -> a, so fаck becomes fack (not fuck)
-		{"cyrillic а (looks like a)", "fаck", false}, // becomes "fack"
-		{"cyrillic о (looks like o)", "fоck", false}, // becomes "fock"
+		// Cyrillic homoglyphs - cyrillic а -> a, so fаck becomes fack (not fuck).
+		// Still not sure if this is the best approach.
+		{"cyrillic а (looks like a)", "fаck", false},
+		{"cyrillic о (looks like o)", "fоck", false},
 
 		// Fullwidth characters - NFKC normalization may handle these differently
-		{"fullwidth f mixed", "ｆuck", false}, // Fullwidth f normalizes differently
-		{"fullwidth all", "ｆｕｃｋ", false},     // Fullwidth chars may not all map to ASCII
+		{"fullwidth f mixed", "ｆuck", false},
+		{"fullwidth all", "ｆｕｃｋ", false},
 	}
 
 	for _, tt := range tests {
@@ -795,13 +786,13 @@ func TestLeetspeakCombinations(t *testing.T) {
 		input    string
 		expected bool
 	}{
-		{"f@ck", false}, // @ -> a, so "fack" not profane
-		{"fvck", true},  // v -> u
-		{"sh!t", true},  // ! -> i
-		{"sh1t", true},  // 1 -> i
-		{"a$$", true},   // $ -> s
-		{"a55", true},   // 5 -> s
-		{"fu(k", false}, // ( not mapped
+		{"f@ck", false},
+		{"fvck", true},
+		{"sh!t", true},
+		{"sh1t", true},
+		{"a$$", true},
+		{"a55", true},
+		{"fu(k", false}, // ( not mapped. I dont intend to support this.
 	}
 
 	for _, tt := range tests {
@@ -832,10 +823,6 @@ func TestZeroWidthCharacterHandling(t *testing.T) {
 	}
 }
 
-// =============================================================================
-// Integration tests
-// =============================================================================
-
 func TestIntegrationCensorAndFind(t *testing.T) {
 	text := "What the fuck is this shit?"
 
@@ -857,7 +844,8 @@ func TestIntegrationCensorAndFind(t *testing.T) {
 	}
 
 	// Censored text should not be profane (when checked literally)
-	// Note: The asterisks themselves won't match patterns
+	// Note: The asterisks themselves won't match patterns. This is intentional.
+	// I'm not sure if it's a good idea to include them in the results.
 }
 
 func TestNewACNodeDepth(t *testing.T) {
@@ -917,7 +905,6 @@ func TestMultipleProfanitiesInText(t *testing.T) {
 	}
 
 	censored := Censor(text, CensorAll)
-	// Should have asterisks
 	if censored == text {
 		t.Error("Text should be censored")
 	}
@@ -946,7 +933,6 @@ func TestFindMatchesPositionMapping(t *testing.T) {
 			}
 
 			for _, m := range matches {
-				// Verify bounds are valid
 				if m.origStart < 0 || m.origStart > len(tt.text) {
 					t.Errorf("invalid origStart: %d for text len %d", m.origStart, len(tt.text))
 				}
@@ -960,6 +946,7 @@ func TestFindMatchesPositionMapping(t *testing.T) {
 
 // Test that CensorMode values are correct
 func TestCensorModeValues(t *testing.T) {
+	// i know...kinda janky but it's the easiest way to test.
 	if CensorAll != 0 {
 		t.Errorf("CensorAll = %d, want 0", CensorAll)
 	}
@@ -980,7 +967,7 @@ func TestCollapsedToOriginalMapping(t *testing.T) {
 
 	// Check that at least some common patterns are mapped
 	// Note: We can't check specific patterns without knowing the exact implementation
-	// But we can verify the map has reasonable entries
+	// But we can verify the map has reasonable entries.
 	for collapsed, original := range collapsedToOriginal {
 		if len(collapsed) == 0 || len(original) == 0 {
 			t.Errorf("empty string in collapsedToOriginal: collapsed=%q, original=%q", collapsed, original)
@@ -1029,19 +1016,19 @@ func TestCollapsedPosInfoStruct(t *testing.T) {
 // Additional edge case tests for findMatches to improve coverage
 func TestFindMatchesEdgeCases(t *testing.T) {
 	// Test with NFKC normalization that changes text length
-	// The ﬁ ligature normalizes to "fi" (2 chars from 1)
+	// The ﬁ ligature normalizes to "fi" (2 chars from 1). NFC would normalize to "f" (1 char).
 	tests := []struct {
 		name string
 		text string
 	}{
-		// Test text ending with profanity (covers end position edge cases)
+
 		{"ending with profanity", "this ends with fuck"},
 		{"only profanity", "shit"},
 		{"profanity at very end", "test shit"},
 
 		// Unicode that NFKC normalizes (covers nt.original != text branch)
-		{"NFKC normalized text", "ﬁne fuck here"}, // ﬁ ligature
-		{"composed unicode", "café fuck naïve"},   // composed chars
+		{"NFKC normalized text", "ﬁne fuck here"},
+		{"composed unicode", "café fuck naïve"},
 
 		// Very short matches
 		{"short profanity", "a ass b"},
@@ -1051,7 +1038,7 @@ func TestFindMatchesEdgeCases(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			// Just ensure it doesn't panic and produces some result
 			matches := findMatches(tt.text, profanityMatcher)
-			_ = matches // Result varies, we just want to exercise the code paths
+			_ = matches
 		})
 	}
 }
@@ -1063,13 +1050,13 @@ func TestNormalizeTextNFKC(t *testing.T) {
 		name  string
 		input string
 	}{
-		{"ligature fi", "ﬁnish"},    // ﬁ -> fi
-		{"ligature fl", "ﬂow"},      // ﬂ -> fl
-		{"superscript", "x²"},       // ² -> 2
-		{"fraction", "½"},           // ½ -> 1/2
-		{"roman numeral", "Ⅳ"},      // Ⅳ -> IV
-		{"circled number", "①"},     // ① -> 1
-		{"compatibility char", "㎞"}, // ㎞ -> km
+		{"ligature fi", "ﬁnish"},
+		{"ligature fl", "ﬂow"},
+		{"superscript", "x²"},
+		{"fraction", "½"},
+		{"roman numeral", "Ⅳ"},
+		{"circled number", "①"},
+		{"compatibility char", "㎞"},
 	}
 
 	for _, tt := range tests {
@@ -1079,7 +1066,7 @@ func TestNormalizeTextNFKC(t *testing.T) {
 			if result.normalized == tt.input {
 				// Some chars may not change, that's OK
 			}
-			// Just ensure no panic
+
 		})
 	}
 }
@@ -1102,7 +1089,6 @@ func TestProfanityAtBoundaries(t *testing.T) {
 		// At end
 		{"say fuck", true},
 
-		// Surrounded by punctuation
 		{".fuck.", true},
 		{"(fuck)", true},
 		{"[fuck]", true},
@@ -1129,12 +1115,10 @@ func TestNormalizedTextStruct(t *testing.T) {
 		t.Errorf("original = %q, want %q", result.original, text)
 	}
 
-	// Check normalized is lowercase
 	if result.normalized != "hello" {
 		t.Errorf("normalized = %q, want %q", result.normalized, "hello")
 	}
 
-	// Check posMap has entries
 	if len(result.posMap) != 5 {
 		t.Errorf("posMap len = %d, want 5", len(result.posMap))
 	}
@@ -1157,7 +1141,6 @@ func TestFindMatchesWithNFKCAndProfanity(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			// Exercise the code paths - just ensure no panic
 			_ = IsProfane(tt.text)
 			_ = Censor(tt.text, CensorAll)
 			_ = FindProfanity(tt.text)
@@ -1198,11 +1181,11 @@ func TestCollapseRepeatsPositionTracking(t *testing.T) {
 		checkStartEnd bool
 	}{
 		{"single char", "a", 1, true},
-		{"two same chars", "aa", 1, true},     // Collapses to 1
-		{"alternating", "aba", 3, true},       // No collapse
-		{"triple repeat", "aaa", 1, true},     // Collapses to 1
-		{"unicode repeated", "日日日", 1, true},  // Collapses to 1 (same char repeated)
-		{"unicode different", "日本語", 3, true}, // No collapse (different chars)
+		{"two same chars", "aa", 1, true},
+		{"alternating", "aba", 3, true},
+		{"triple repeat", "aaa", 1, true},
+		{"unicode repeated", "日日日", 1, true},
+		{"unicode different", "日本語", 3, true},
 	}
 
 	for _, tt := range tests {
@@ -1213,7 +1196,6 @@ func TestCollapseRepeatsPositionTracking(t *testing.T) {
 					tt.input, len([]rune(result)), tt.expectedRunes)
 			}
 			if tt.checkStartEnd {
-				// Verify startPos and endPos have same length as result bytes
 				if len(info.startPos) != len(result) {
 					t.Errorf("startPos len = %d, result len = %d",
 						len(info.startPos), len(result))
@@ -1234,10 +1216,10 @@ func TestProfanityAtExactEnd(t *testing.T) {
 		text     string
 		expected bool
 	}{
-		{"fuck", true},         // Exact match
-		{"a fuck", true},       // End of string
-		{"this is shit", true}, // End with longer word
-		{"multiple ass", true}, // Shorter word at end
+		{"fuck", true},
+		{"a fuck", true},
+		{"this is shit", true},
+		{"multiple ass", true},
 	}
 
 	for _, tt := range tests {

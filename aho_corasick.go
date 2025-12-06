@@ -99,7 +99,7 @@ func (ac *ahoCorasick) buildFailLinks() {
 
 // Search finds all matches of the patterns in the text.
 // The callback receives the pattern index, start byte position, and end byte position.
-// The callback should return true to continue searching, false to stop.
+// The callback should return true to continue searching, flase to stop.
 func (ac *ahoCorasick) Search(text string, callback func(match acMatch) bool) {
 	node := ac.root
 	bytePos := 0
