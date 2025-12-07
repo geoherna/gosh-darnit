@@ -6,8 +6,8 @@
 # gosh-darnit
 
 [![CI](https://github.com/geoherna/gosh-darnit/actions/workflows/ci.yml/badge.svg)](https://github.com/geoherna/gosh-darnit/actions/workflows/ci.yml)
-[![codecov](https://codecov.io/gh/geoherna/gosh-darnit/branch/main/graph/badge.svg)](https://codecov.io/gh/geoherna/gosh-darnit)
 [![Go Report Card](https://goreportcard.com/badge/github.com/geoherna/gosh-darnit)](https://goreportcard.com/report/github.com/geoherna/gosh-darnit)
+[![codecov](https://codecov.io/gh/geoherna/gosh-darnit/branch/main/graph/badge.svg)](https://codecov.io/gh/geoherna/gosh-darnit)
 [![Go Reference](https://pkg.go.dev/badge/github.com/geoherna/gosh-darnit.svg)](https://pkg.go.dev/github.com/geoherna/gosh-darnit)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
