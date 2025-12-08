@@ -19,11 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
-NOTE ON CONTENT:
-
-This software contains a list of profanities, slurs, and other offensive terms
-solely for the purpose of detecting and filtering harmful language in
-user-generated content. These terms are included for harm-reduction, research,
-and moderation purposes only. Their presence in the source code does not
-constitute endorsement or promotion of such language by the authors.
