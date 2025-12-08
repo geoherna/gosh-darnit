@@ -161,7 +161,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## Special Shoutouts
 
-Huge thanks to <a href="https://johnhyunkim.com/" target="_blank" rel="noopener noreferrer"><strong>John Kim</strong></a> for the graphic design assets used in this project.
+Huge thanks to [**John Kim**](https://johnhyunkim.com/) for the graphic design assets used in this project.
 
 ## Note on content
 This software contains a list of profanities, slurs, and other offensive terms
