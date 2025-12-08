@@ -1,9 +1,10 @@
 
 <p align="center">
-<img width="500" height="508" alt="Emoji-angry-default" src="https://github.com/user-attachments/assets/3af0e6fe-9fdb-4e8f-9d41-5cf17881e43b" />
+<img width="500" height="508" alt="Emoji-angry-default" src="https://github.com/user-attachments/assets/35e62f5d-d9eb-4535-a549-f02902079ad0" />
 </p>
 
 # gosh-darnit
+
 
 [![CI](https://github.com/geoherna/gosh-darnit/actions/workflows/ci.yml/badge.svg)](https://github.com/geoherna/gosh-darnit/actions/workflows/ci.yml)
 [![Go Report Card](https://goreportcard.com/badge/github.com/geoherna/gosh-darnit?v=2)](https://goreportcard.com/report/github.com/geoherna/gosh-darnit)
@@ -160,7 +161,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## Special Shoutouts
 
-Huge thanks to [**John Kim**](https://johnhyunkim.com/) for the graphic design assets used in this project.
+Huge thanks to <a href="https://johnhyunkim.com/" target="_blank" rel="noopener noreferrer"><strong>John Kim</strong></a> for the graphic design assets used in this project.
 
 ## License
 
