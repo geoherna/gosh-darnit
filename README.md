@@ -163,6 +163,13 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 Huge thanks to <a href="https://johnhyunkim.com/" target="_blank" rel="noopener noreferrer"><strong>John Kim</strong></a> for the graphic design assets used in this project.
 
+## Note on content
+This software contains a list of profanities, slurs, and other offensive terms
+solely for the purpose of detecting and filtering harmful language in
+user-generated content. These terms are included for harm-reduction, research,
+and moderation purposes only. Their presence in the source code does not
+constitute endorsement or promotion of such language by the authors.
+
 ## License
 
 MIT License - see [LICENSE](LICENSE) for details.
