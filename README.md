@@ -160,7 +160,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## Special Shoutouts
 
-Huge thanks to **John Kim** for the graphic design assets used in this project.
+Huge thanks to [**John Kim**](https://johnhyunkim.com/) for the graphic design assets used in this project.
 
 ## License
 
