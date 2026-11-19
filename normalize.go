@@ -520,33 +520,43 @@ func isValidMatch(normalizedSegment, pattern string) bool {
 		return true
 	}
 
-	// Check if segment is pattern with some characters repeated
-	// Walk through pattern and segment together, allowing repeats
+	// Check if segment is pattern with some characters repeated.
+	// Walk both one run of a repeated character at a time: each segment run
+	// must be the same character as the pattern's run and at least as long.
+	// Comparing whole runs keeps a doubled letter in the pattern ("gg" in
+	// "faggot") from being consumed by the segment's run of an earlier match.
 	segmentRunes := []rune(normalizedSegment)
 	patternRunes := []rune(pattern)
 
 	si := 0 // segment index
 	pi := 0 // pattern index
 
-	for pi < len(patternRunes) && si < len(segmentRunes) {
-		if segmentRunes[si] == patternRunes[pi] {
-			// Characters match, advance pattern
-			lastMatch := segmentRunes[si]
-			si++
-			pi++
-
-			// Skip any repeated characters in segment
-			for si < len(segmentRunes) && segmentRunes[si] == lastMatch {
-				si++
-			}
-		} else {
+	for pi < len(patternRunes) {
+		if si >= len(segmentRunes) || segmentRunes[si] != patternRunes[pi] {
 			// Characters don't match - not a valid extension
+			return false
+		}
+
+		current := patternRunes[pi]
+		patternRun := 0
+		for pi < len(patternRunes) && patternRunes[pi] == current {
+			pi++
+			patternRun++
+		}
+		segmentRun := 0
+		for si < len(segmentRunes) && segmentRunes[si] == current {
+			si++
+			segmentRun++
+		}
+
+		// A shorter run means the segment is a different word that only
+		// collapses to the pattern ("as" for "ass", "bob" for "boob")
+		if segmentRun < patternRun {
 			return false
 		}
 	}
 
-	// Valid if we consumed the entire pattern
 	// Any remaining characters in segment after pattern is consumed means
 	// the segment has extra characters that aren't just repeats
-	return pi == len(patternRunes) && si == len(segmentRunes)
+	return si == len(segmentRunes)
 }

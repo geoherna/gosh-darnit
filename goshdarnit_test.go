@@ -37,8 +37,12 @@ func TestIsProfane(t *testing.T) {
 		// Repeated characters
 		{"repeated fuuuck", "What the fuuuuck", true},
 		{"repeated shiiiit", "Oh shiiiit", true},
-		// Note: "assss" collapses to "as" (single s), but "ass" has 2 s's - doesn't match
-		{"repeated assss", "what an assss", false},
+		// Words with a double letter: the repeat may stretch any run
+		{"repeated assss", "what an assss", true},
+		{"repeated faaaggot", "you faaaggot", true},
+		{"repeated niiigger", "niiigger", true},
+		{"repeated asssshole", "what an asssshole", true},
+		{"double letter written once", "a bob haircut", false},
 
 		// Word boundary prevention (false positives)
 		{"bass is not profane", "I play bass guitar", false},
@@ -723,6 +727,14 @@ func TestIsValidMatch(t *testing.T) {
 		{"empty segment", "", "fuck", false},
 		{"empty pattern", "test", "", false},
 		{"both empty", "", "", true},
+		{"double letter exact", "ass", "ass", true},
+		{"double letter repeated", "asssss", "ass", true},
+		{"repeat before a double letter", "faaaggot", "faggot", true},
+		{"double letter tripled", "fagggot", "faggot", true},
+		{"repeats around a double letter", "aaasssshole", "asshole", true},
+		{"double letter written once", "as", "ass", false},
+		{"double letter written once mid-word", "bob", "boob", false},
+		{"double letter written once after a repeat", "faaagot", "faggot", false},
 	}
 
 	for _, tt := range tests {
