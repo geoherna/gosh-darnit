@@ -14,17 +14,12 @@ type wordGroup struct {
 var wordGroups = []wordGroup{
 	// General profanity
 	{SeverityModerate, []string{
-		"fuck", "fucking", "fucked", "fucker", "fuckers", "fucks", "fuckhead", "fuckface",
-		"fuckwit", "fuckwad", "fuckboy", "fuckboi", "fuckup", "fuckups",
-		"motherfuck", "motherfucker", "motherfucking", "motherfuckers",
 		"shit", "shits", "shitty", "shitting", "shitted", "shitstain", "shithead",
 		"shitheads", "shitface", "shitfaced", "shithole", "shithouse", "shitbag",
 		"bullshit", "bullshitting", "horseshit", "dipshit", "dumbshit", "apeshit",
 		"ass", "asses", "asshole", "assholes", "asshat", "asswipe", "assface",
 		"assclown", "jackass", "dumbass", "fatass", "lardass", "smartass", "hardass",
 		"badass", "kickass", "candyass", "halfass", "halfassed",
-		"bitch", "bitches", "bitchy", "bitching", "bitched", "sonofabitch", "sonuvabitch",
-		"bastard", "bastards",
 	}},
 	{SeverityMild, []string{
 		"damn", "damned", "damnit", "goddamn", "goddamned", "goddamnit",
@@ -33,7 +28,11 @@ var wordGroups = []wordGroup{
 		"piss", "pissed", "pisses", "pissing", "pissoff",
 	}},
 	{SeveritySevere, []string{
-		"fucktard",
+		"fuck", "fucking", "fucked", "fucker", "fuckers", "fucks", "fuckhead", "fuckface",
+		"fuckwit", "fuckwad", "fuckboy", "fuckboi", "fuckup", "fuckups", "fucktard",
+		"motherfuck", "motherfucker", "motherfucking", "motherfuckers",
+		"bitch", "bitches", "bitchy", "bitching", "bitched", "sonofabitch", "sonuvabitch",
+		"bastard", "bastards",
 		"whore", "whores", "whorish", "whorey",
 		"slut", "sluts", "slutty", "slutbag",
 		"skank", "skanky", "skanks",
@@ -256,12 +255,13 @@ var wordGroups = []wordGroup{
 		"thundercunt",
 		"pikey", "pikeys",
 		"gypo", "gypos", "gyppo", "gyppos",
-	}},
-	{SeverityModerate, []string{
 		"fuckoff", "fuck off", "fuckall", "fuck all",
-		"shitload", "shitloads", "shitshow",
 		"clusterfuck",
 		"mindfuck",
+	}},
+	{SeverityModerate, []string{
+		"shitload", "shitloads", "shitshow",
+		// Abbreviations that don't spell the word out.
 		"clusterf",
 		"wtf", "stfu", "gtfo",
 		"queef", "queefs", "queefing",

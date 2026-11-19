@@ -92,8 +92,8 @@ Every listed word has a severity:
 | Severity | Covers | Examples |
 |----------|--------|----------|
 | `SeverityMild` | Words most audiences accept, and ordinary words that can also be insults | damn, crap, idiot, queen |
-| `SeverityModerate` | Ordinary profanity and crude insults | fuck, shit, bitch |
-| `SeveritySevere` | Slurs, explicit sexual terms and sexual insults | racial and homophobic slurs, porn |
+| `SeverityModerate` | Ordinary profanity and crude insults | shit, ass, dick, wtf |
+| `SeveritySevere` | Slurs, explicit sexual terms, sexual insults and the strongest profanity | racial and homophobic slurs, porn, fuck, bitch |
 
 A word's severity rates how offensive it is in its usual sense, so "queen" and "trap" are mild.
 

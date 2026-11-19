@@ -7,10 +7,11 @@ const (
 	// SeverityMild covers words most audiences accept and ordinary words that
 	// can also be insults: "damn", "crap", "idiot", "queen", clinical anatomy.
 	SeverityMild Severity = iota + 1
-	// SeverityModerate covers ordinary profanity and crude insults: "fuck",
-	// "shit", "bitch", "dick".
+	// SeverityModerate covers ordinary profanity and crude insults: "shit",
+	// "ass", "dick", "wtf".
 	SeverityModerate
-	// SeveritySevere covers slurs, explicit sexual terms and sexual insults.
+	// SeveritySevere covers slurs, explicit sexual terms, sexual insults and
+	// the strongest profanity: "fuck", "bitch", "bastard".
 	SeveritySevere
 )
 
