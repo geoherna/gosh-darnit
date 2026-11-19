@@ -25,6 +25,7 @@ A fast, efficient Go library for profanity detection and censorship.
   - Repeated characters: `fuuuuck`, `shiiiit`
   - NFKC Unicode normalization
 - **Flexible censoring**: Multiple modes for replacing profanity
+- **Severity levels**: Every word is mild, moderate or severe, so you can act only on the worst
 - **Zero external dependencies**: Only uses Go standard library + `golang.org/x/text`
 
 ## Installation
@@ -84,6 +85,27 @@ func main() {
 }
 ```
 
+### Severity Levels
+
+Every listed word has a severity:
+
+| Severity | Covers | Examples |
+|----------|--------|----------|
+| `SeverityMild` | Words most audiences accept, and ordinary words that can also be insults | damn, crap, idiot, queen |
+| `SeverityModerate` | Ordinary profanity and crude insults | fuck, shit, bitch |
+| `SeveritySevere` | Slurs, explicit sexual terms and sexual insults | racial and homophobic slurs, porn |
+
+A word's severity rates how offensive it is in its usual sense, so "queen" and "trap" are mild.
+
+```go
+text := "damn this shit"
+
+goshdarnit.FindProfanity(text)                                   // ["damn", "shit"]
+goshdarnit.FindProfanityAtLeast(text, goshdarnit.SeverityModerate) // ["shit"]
+goshdarnit.IsProfaneAtLeast(text, goshdarnit.SeveritySevere)       // false
+goshdarnit.SeverityOf("shit")                                    // SeverityModerate
+```
+
 ### Evasion Detection
 
 The library automatically handles common evasion techniques:
@@ -128,6 +150,9 @@ goshdarnit.IsProfane("Classic movie")         // false
 | `Censor(text string, mode CensorMode) string` | Replaces profanity with asterisks |
 | `CensorWithDefault(text string) string` | Censors with `CensorAll` mode |
 | `FindProfanity(text string) []string` | Returns list of matched profane words |
+| `FindProfanityAtLeast(text string, minSeverity Severity) []string` | `FindProfanity` limited to words of at least `minSeverity` |
+| `IsProfaneAtLeast(text string, minSeverity Severity) bool` | Returns true if text contains a word of at least `minSeverity` |
+| `SeverityOf(word string) Severity` | Returns a listed word's severity, or 0 if it is not listed |
 
 ### Censor Modes
 

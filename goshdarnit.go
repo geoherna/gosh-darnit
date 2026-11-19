@@ -35,6 +35,7 @@ func init() {
 	}
 
 	profanityMatcher = newAhoCorasick(collapsedPatterns)
+	wordSeverity = buildWordSeverity()
 }
 
 // IsProfane returns true if the text contains any profanity.
