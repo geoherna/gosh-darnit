@@ -90,15 +90,12 @@ var wordGroups = []wordGroup{
 
 	// Racial slurs
 	{SeveritySevere, []string{
-		"nigger", "niggers", "nigga", "niggas", "negro", "negroes",
+		"nigger", "niggers", "nigga", "niggas",
 		"chink", "chinks", "chinky",
 		"gook", "gooks",
-		"jap", "japs",
 		"spic", "spics", "spick", "spicks",
 		"wetback", "wetbacks",
 		"beaner", "beaners",
-		"honky", "honkey", "honkies",
-		"whitey", "whities",
 		"kike", "kikes",
 		"yid", "yids",
 		"heeb", "heebs",
@@ -106,7 +103,6 @@ var wordGroups = []wordGroup{
 		"sandnigger", "sandniggers",
 		"camel jockey", "cameljockey",
 		"raghead", "ragheads",
-		"paki", "pakis",
 		"curry muncher",
 		"wog", "wogs",
 		"abo", "abos",
@@ -124,6 +120,13 @@ var wordGroups = []wordGroup{
 		"pickaninny", "picaninny",
 	}},
 	{SeverityModerate, []string{
+		// Also ordinary words: Spanish "negro", the Negro Leagues, "Jap." for
+		// Japan.
+		"negro", "negroes",
+		"jap", "japs",
+		"paki", "pakis",
+		"honky", "honkey", "honkies",
+		"whitey", "whities",
 		"gringo", "gringos",
 	}},
 	{SeverityMild, []string{
@@ -134,11 +137,8 @@ var wordGroups = []wordGroup{
 	// Homophobic slurs
 	{SeveritySevere, []string{
 		"fag", "fags", "faggot", "faggots", "faggy",
-		"homo", "homos",
 		"dyke", "dykes", "dykey",
-		"lesbo", "lesbos", "lezbo", "lezbos",
 		"poofter", "poofters",
-		"sodomite", "sodomites",
 		"buttboy", "buttboys",
 		"pillow biter", "pillowbiter",
 		"fudgepacker", "fudge packer", "fudgepackers",
@@ -146,8 +146,12 @@ var wordGroups = []wordGroup{
 		"ass bandit",
 	}},
 	{SeverityModerate, []string{
-		// "Queer" is also a reclaimed self-description.
+		// "Queer" is also a reclaimed self-description; "homo sapiens",
+		// Lesbos the island and "sodomite" in scripture are ordinary uses.
 		"queer", "queers",
+		"homo", "homos",
+		"lesbo", "lesbos", "lezbo", "lezbos",
+		"sodomite", "sodomites",
 		"poof", "poofs",
 	}},
 	{SeverityMild, []string{
@@ -159,11 +163,11 @@ var wordGroups = []wordGroup{
 	// Transphobic slurs
 	{SeveritySevere, []string{
 		"tranny", "trannies",
-		"shemale", "shemales", "she-male",
-		"ladyboy", "ladyboys", "lady-boy",
 		"heshe", "he-she",
 	}},
 	{SeverityModerate, []string{
+		"shemale", "shemales", "she-male",
+		"ladyboy", "ladyboys", "lady-boy",
 		"tgirl",
 	}},
 	{SeverityMild, []string{
@@ -174,12 +178,11 @@ var wordGroups = []wordGroup{
 	// Ableist slurs
 	{SeveritySevere, []string{
 		"retard", "retards", "retarded", "tard", "tards",
-		"spaz", "spazz", "spazzy",
-		"mongoloid",
 	}},
 	{SeverityModerate, []string{
+		"spaz", "spazz", "spazzy",
 		"spastic",
-		"mong",
+		"mong", "mongoloid",
 	}},
 	{SeverityMild, []string{
 		"cripple", "crippled", "cripples",

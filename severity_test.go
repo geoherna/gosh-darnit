@@ -86,7 +86,8 @@ func TestFindProfanityAtLeast(t *testing.T) {
 		{"empty text", "", SeverityMild, nil},
 		{"leetspeak slur", "n1gg3r", SeveritySevere, []string{"nigger"}},
 		{"repeated letters", "fuuuuck", SeverityModerate, []string{"fuck"}},
-		{"collapsed pair", "spazzzz", SeveritySevere, []string{"spaz"}},
+		{"collapsed pair", "spazzzz", SeverityModerate, []string{"spaz"}},
+		{"moderate slur passes severe", "Negro Leagues", SeveritySevere, nil},
 	}
 
 	for _, tt := range tests {
